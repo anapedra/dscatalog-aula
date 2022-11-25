@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,9 +27,9 @@ public class DscatalogApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Category category1=new Category(null,"Books");
-        Category category2=new Category(null,"Electronics");
-        Category category3=new Category(null,"Computers");
+        Category category1=new Category(null,"Books", Instant.now(),Instant.now());
+        Category category2=new Category(null,"Electronics",Instant.now(),Instant.now() );
+        Category category3=new Category(null,"Computers",Instant.now(),Instant.now() );
 
         categoryRepository.saveAll(Arrays.asList(category1,category2,category3));
 

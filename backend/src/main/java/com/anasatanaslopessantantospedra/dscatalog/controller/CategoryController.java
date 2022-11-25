@@ -41,10 +41,14 @@ public class CategoryController {
         return ResponseEntity.created(uri).body(categoryDTO);
 
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<?>upDateCateriry(@PathVariable Long id,@RequestBody @Valid CategoryDTO categoryDTO){
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CategoryDTO>upDateCateriry(@PathVariable Long id,@RequestBody  CategoryDTO categoryDTO){
         categoryDTO=categoryService.upDateCategory(id,categoryDTO);
-        return ResponseEntity.ok().body(categoryDTO);
-
+        return ResponseEntity.noContent().build();
+    }
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Valid> daletCategory(@PathVariable Long id){
+        categoryService.deletCategory(id);
+        return ResponseEntity.noContent().build();
     }
 }

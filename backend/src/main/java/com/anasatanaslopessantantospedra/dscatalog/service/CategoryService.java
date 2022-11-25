@@ -7,6 +7,8 @@ import com.anasatanaslopessantantospedra.dscatalog.service.exceptions.DataBaseEx
 import com.anasatanaslopessantantospedra.dscatalog.service.exceptions.ResorceNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityNotFoundException;
@@ -54,18 +56,32 @@ public class CategoryService {
             catch (EntityNotFoundException e){
                  throw new ResorceNotFoundException("Id " + id + " not found :(");
             }
-            //FOI TESTADO COM O ID QUE NÃO EXISTE E O ERRO CONTINUOU 500 COM O TRY
+            //FOI TESTADO COM um ID QUE NÃO EXISTE E O ERRO CONTINUOU 500 COM O TRY
         }
-
-
         /*
         var category=new Category(); // As duas maneiras deu certo más pesquisar sobre qual maneira é mais correta.
         BeanUtils.copyProperties(categoryDTO,category);// Ou categoryDTO.setName(categoryDTO.getName) com todos atributos a depender das sus estrategias.
         category.setId(id);
         category=categoryRepository.save(category);
         return new CategoryDTO(category);
-
          */
+      public void deletCategory(Long id){
+          //findCategoryById(id);
+         try {
+              categoryRepository.deleteById(id);
+          }
+         catch (EmptyResultDataAccessException e){
+             throw new ResorceNotFoundException("Id "+id+" not found!");
+         }
+         catch (DataIntegrityViolationException e){
+             throw new DataBaseException("Integrity violation");
+         }
+
+
+      }
+
+
+
     }
 
 

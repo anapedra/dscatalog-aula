@@ -1,7 +1,10 @@
 package com.anasatanaslopessantantospedra.dscatalog.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 @Entity
@@ -12,15 +15,20 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT-3")
+   // @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant createAt;
+    private Instant updateAt;
     public Category(){
 
     }
 
 
-    public Category(Long id, String name) {
+    public Category(Long id, String name, Instant createAt, Instant updateAt) {
         this.id = id;
         this.name = name;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
     }
 
 
@@ -39,6 +47,23 @@ public class Category implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Instant getCreateAt() {
+        return createAt;
+    }
+    public Instant getUpdateAt() {
+        return updateAt;
+    }
+    @PrePersist
+    public void prePersist(){
+        createAt=Instant.now();
+    }
+
+    @PreUpdate
+    public void preApdate(){
+        updateAt =Instant.now();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
