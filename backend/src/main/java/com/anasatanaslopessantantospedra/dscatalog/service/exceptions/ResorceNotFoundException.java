@@ -1,9 +1,9 @@
 package com.anasatanaslopessantantospedra.dscatalog.service.exceptions;
 
-public class EntityNotFoundException extends RuntimeException{
+public class ResorceNotFoundException extends RuntimeException{
     private static final long serialVersionUID=1L;
 
-    public EntityNotFoundException(String msg){
+    public ResorceNotFoundException(String msg){
         super(msg);
     }
 }

@@ -3,14 +3,13 @@ package com.anasatanaslopessantantospedra.dscatalog.service;
 import com.anasatanaslopessantantospedra.dscatalog.DTO.CategoryDTO;
 import com.anasatanaslopessantantospedra.dscatalog.model.Category;
 import com.anasatanaslopessantantospedra.dscatalog.repository.CategoryRepository;
-import com.anasatanaslopessantantospedra.dscatalog.service.exceptions.EntityNotFoundException;
+import com.anasatanaslopessantantospedra.dscatalog.service.exceptions.DataBaseException;
+import com.anasatanaslopessantantospedra.dscatalog.service.exceptions.ResorceNotFoundException;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,7 +31,7 @@ public class CategoryService {
     public CategoryDTO findCategoryById(Long id){
      Optional<Category> obj=categoryRepository.findById(id);
      Category entity=obj.orElseThrow(
-             ()-> new EntityNotFoundException("Id "+id+" not found"));
+             ()-> new ResorceNotFoundException("Id "+id+" not found"));
         return new CategoryDTO(entity);
     }
     @Transactional
@@ -42,5 +41,31 @@ public class CategoryService {
         category=categoryRepository.save(category);
         return new CategoryDTO(category);
     }
+    @Transactional
+    public CategoryDTO upDateCategory(Long id, CategoryDTO categoryDTO){
+      // findCategoryById(id); // Não estoura uma e devolve uma menssagem pessonalizada más acredito que não seja a mrlhor forma de tratar essa exeção.
+            try {
+                var category= categoryRepository.getOne(id); // nas versoes mais recentes do Spring Boot essa fução é: getReferenceById e não getOne;
+                BeanUtils.copyProperties(categoryDTO,category);// Ou categoryDTO.setName(categoryDTO.getName) com todos atributos a depender das sus estrategias.
+                category.setId(id);
+                category=categoryRepository.save(category);
+                return new CategoryDTO(category);
+            }
+            catch (EntityNotFoundException e){
+                 throw new ResorceNotFoundException("Id " + id + " not found :(");
+            }
+            //FOI TESTADO COM O ID QUE NÃO EXISTE E O ERRO CONTINUOU 500 COM O TRY
+        }
 
-}
+
+        /*
+        var category=new Category(); // As duas maneiras deu certo más pesquisar sobre qual maneira é mais correta.
+        BeanUtils.copyProperties(categoryDTO,category);// Ou categoryDTO.setName(categoryDTO.getName) com todos atributos a depender das sus estrategias.
+        category.setId(id);
+        category=categoryRepository.save(category);
+        return new CategoryDTO(category);
+
+         */
+    }
+
+
