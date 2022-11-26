@@ -114,4 +114,8 @@ public class Product implements Serializable {
     public int hashCode() {
         return Objects.hash(getId());
     }
+
+    public void setDate(Instant date) {
+        this.date=date;
+    }
 }
