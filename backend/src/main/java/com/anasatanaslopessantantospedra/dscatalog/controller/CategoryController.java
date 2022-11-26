@@ -5,7 +5,9 @@ import com.anasatanaslopessantantospedra.dscatalog.model.Category;
 import com.anasatanaslopessantantospedra.dscatalog.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,14 +27,19 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryDTO>> findAllCategory(){
-       List<CategoryDTO> categories=categoryService.findAllCategory();
-       return ResponseEntity.status(HttpStatus.OK).body(categories);
+    public ResponseEntity<Page<CategoryDTO>> findAllCategory(@RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                             @RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
+                                                             @RequestParam(value = "direction", defaultValue = "ASC") String direction,
+                                                             @RequestParam(value = "orderBy", defaultValue = "id") String orderBy
+                                                            ){
+        PageRequest pageRequest=PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction),orderBy);
+       Page<CategoryDTO> categories=categoryService.findAllCategoryPaged(pageRequest);
+       return ResponseEntity.ok().body(categories);
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity<CategoryDTO> findCategoryById(@PathVariable Long id){
         CategoryDTO categorieDTO=categoryService.findCategoryById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(categorieDTO);
+        return ResponseEntity.ok().body(categorieDTO);
     }
     @PostMapping
     public ResponseEntity<Object > insertCategory(@RequestBody @Valid CategoryDTO categoryDTO){
