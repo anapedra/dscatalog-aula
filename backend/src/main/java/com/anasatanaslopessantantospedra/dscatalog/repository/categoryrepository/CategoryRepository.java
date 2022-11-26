@@ -1,4 +1,4 @@
-package com.anasatanaslopessantantospedra.dscatalog.repository;
+package com.anasatanaslopessantantospedra.dscatalog.repository.categoryrepository;
 
 import com.anasatanaslopessantantospedra.dscatalog.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;

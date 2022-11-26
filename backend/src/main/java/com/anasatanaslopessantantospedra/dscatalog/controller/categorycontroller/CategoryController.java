@@ -1,21 +1,16 @@
-package com.anasatanaslopessantantospedra.dscatalog.controller;
+package com.anasatanaslopessantantospedra.dscatalog.controller.categorycontroller;
 
 import com.anasatanaslopessantantospedra.dscatalog.DTO.CategoryDTO;
-import com.anasatanaslopessantantospedra.dscatalog.model.Category;
-import com.anasatanaslopessantantospedra.dscatalog.service.CategoryService;
-import org.springframework.beans.BeanUtils;
+import com.anasatanaslopessantantospedra.dscatalog.service.servicecategory.CategoryService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/categoreis")

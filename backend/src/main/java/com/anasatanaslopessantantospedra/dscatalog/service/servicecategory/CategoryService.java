@@ -1,12 +1,11 @@
-package com.anasatanaslopessantantospedra.dscatalog.service;
+package com.anasatanaslopessantantospedra.dscatalog.service.servicecategory;
 
 import com.anasatanaslopessantantospedra.dscatalog.DTO.CategoryDTO;
 import com.anasatanaslopessantantospedra.dscatalog.model.Category;
-import com.anasatanaslopessantantospedra.dscatalog.repository.CategoryRepository;
+import com.anasatanaslopessantantospedra.dscatalog.repository.categoryrepository.CategoryRepository;
 import com.anasatanaslopessantantospedra.dscatalog.service.exceptions.DataBaseException;
 import com.anasatanaslopessantantospedra.dscatalog.service.exceptions.ResorceNotFoundException;
 import org.springframework.beans.BeanUtils;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -14,9 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {

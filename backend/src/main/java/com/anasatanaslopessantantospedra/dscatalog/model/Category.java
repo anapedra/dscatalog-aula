@@ -1,11 +1,14 @@
 package com.anasatanaslopessantantospedra.dscatalog.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -15,10 +18,15 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT-3")
-   // @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
+    private Set<Product> products=new HashSet<>();
+    //@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT-3")
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant createAt;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updateAt;
+
     public Category(){
 
     }
@@ -31,6 +39,9 @@ public class Category implements Serializable {
         this.updateAt = updateAt;
     }
 
+    public Set<Product> getProducts() {
+        return products;
+    }
 
     public Long getId() {
         return id;
