@@ -1,30 +1,27 @@
 package com.anasatanaslopessantantospedra.dscatalog.DTO;
 
 import com.anasatanaslopessantantospedra.dscatalog.model.Role;
-import com.anasatanaslopessantantospedra.dscatalog.model.User;
-import org.springframework.context.support.BeanDefinitionDsl;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
  public class RoleDTO implements Serializable {
     private static final long serialVersionUID=1L;
-    private Long id;
-    private String authority;
-    private Set<User> users=new HashSet<>();
+
+     private Long id;
+     private String authority;
 
      public RoleDTO(Long id, String authority) {
          this.id = id;
          this.authority = authority;
      }
-
-
+     public RoleDTO(Role entity) {
+         id = entity.getId();
+         authority = entity.getAuthority();
+     }
     public RoleDTO(){
 
     }
-
      @Override
      public boolean equals(Object o) {
          if (this == o) return true;
@@ -54,9 +51,7 @@ import java.util.Set;
          this.authority = authority;
      }
 
-     public Set<User> getUsers() {
-         return users;
-     }
+
 
 
  }

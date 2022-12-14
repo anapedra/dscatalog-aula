@@ -1,7 +1,7 @@
 package com.anasatanaslopessantantospedra.dscatalog.DTO;
 
-import com.anasatanaslopessantantospedra.dscatalog.model.Role;
 import com.anasatanaslopessantantospedra.dscatalog.model.User;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,27 +12,26 @@ public class UserDTO implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
-    private Set<Role> roles =new HashSet<>();
+    private Set<RoleDTO> roles=new HashSet<>();
+
+
 
    public UserDTO(){
 
     }
-
-    public UserDTO(Long id, String firstName, String lastName, String email, String password) {
+    public UserDTO(Long id, String firstName, String lastName, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
-    }
 
-     UserDTO(User entity) {
-        this.id = entity.getId();
-        this.firstName = entity.getFirstName();
-        this.lastName = entity.getLastName();
-        this.email = entity.getEmail();
-        this.password = entity.getPassword();
+    }
+    public UserDTO(User entity) {
+        id = entity.getId();
+        firstName = entity.getFirstName();
+        lastName = entity.getLastName();
+        email = entity.getEmail();
+        entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
 
     }
 
@@ -68,17 +67,7 @@ public class UserDTO implements Serializable {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Role> getRoles() {
+    public Set<RoleDTO> getRoles() {
         return roles;
     }
-
-
 }
