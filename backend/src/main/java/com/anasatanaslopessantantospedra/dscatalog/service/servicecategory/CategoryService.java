@@ -2,14 +2,14 @@ package com.anasatanaslopessantantospedra.dscatalog.service.servicecategory;
 
 import com.anasatanaslopessantantospedra.dscatalog.DTO.CategoryDTO;
 import com.anasatanaslopessantantospedra.dscatalog.model.Category;
-import com.anasatanaslopessantantospedra.dscatalog.repository.categoryrepository.CategoryRepository;
+import com.anasatanaslopessantantospedra.dscatalog.repositories.categoryrepository.CategoryRepository;
 import com.anasatanaslopessantantospedra.dscatalog.service.exceptions.DataBaseException;
 import com.anasatanaslopessantantospedra.dscatalog.service.exceptions.ResorceNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityNotFoundException;
@@ -23,8 +23,8 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
     @Transactional(readOnly = true)
-    public Page<CategoryDTO> findAllCategoryPaged(PageRequest pageRequest){
-        Page<Category> list=categoryRepository.findAll(pageRequest);
+    public Page<CategoryDTO> findAllCategoryPaged(Pageable pageable){
+        Page<Category> list=categoryRepository.findAll(pageable);
         return list.map(x -> new CategoryDTO(x));
     }
     @Transactional(readOnly = true)

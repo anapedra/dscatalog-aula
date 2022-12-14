@@ -39,6 +39,11 @@ public class Category implements Serializable {
         this.updateAt = updateAt;
     }
 
+    public Category( Long id,String name) {
+       this.id=id;
+       this.name=name;
+    }
+
     public Set<Product> getProducts() {
         return products;
     }

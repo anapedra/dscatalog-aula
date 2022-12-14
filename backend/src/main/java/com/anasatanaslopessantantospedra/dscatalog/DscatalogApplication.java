@@ -2,8 +2,8 @@ package com.anasatanaslopessantantospedra.dscatalog;
 
 import com.anasatanaslopessantantospedra.dscatalog.model.Category;
 import com.anasatanaslopessantantospedra.dscatalog.model.Product;
-import com.anasatanaslopessantantospedra.dscatalog.repository.categoryrepository.CategoryRepository;
-import com.anasatanaslopessantantospedra.dscatalog.repository.productrepository.ProductRepository;
+import com.anasatanaslopessantantospedra.dscatalog.repositories.categoryrepository.CategoryRepository;
+import com.anasatanaslopessantantospedra.dscatalog.repositories.productrepository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,18 +12,22 @@ import java.time.Instant;
 import java.util.Arrays;
 
 @SpringBootApplication
-public class DscatalogApplication implements CommandLineRunner {
-
+public class DscatalogApplication  {
+/*
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
     public DscatalogApplication(CategoryRepository categoryRepository, ProductRepository productRepository) {
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
     }
+    implements CommandLineRunner
+
+ */
 
     public static void main(String[] args) {
         SpringApplication.run(DscatalogApplication.class, args);
     }
+    /*
 
     @Override
     public void run(String... args) throws Exception {
@@ -34,13 +38,13 @@ public class DscatalogApplication implements CommandLineRunner {
 
         categoryRepository.saveAll(Arrays.asList(category1,category2,category3));
 
-        Product product1=new Product(null,"TV1","Smart TV 65 Crystal UHD 4K Samsung 65BU8000," +
+        Product product1=new Product(null,"ATV1","Smart TV 65 Crystal UHD 4K Samsung 65BU8000," +
                 " Painel Dynamic Crystal Color, Design slim, Tela sem limites, Alexa built in, Controle Remoto Único",
                 4.500,null,Instant.now(),Instant.now());
-        Product product2=new Product(null,"TV2","Smart TV 65 Crystal UHD 4K Samsung 65BU8000," +
+        Product product2=new Product(null,"BTV2","Smart TV 65 Crystal UHD 4K Samsung 65BU8000," +
                 " Painel Dynamic Crystal Color, Design slim, Tela sem limites, Alexa built in, Controle Remoto Único",
                 4.500,null,Instant.now(),Instant.now());
-        Product product3=new Product(null,"TV3","Smart TV 65 Crystal UHD 4K Samsung 65BU8000," +
+        Product product3=new Product(null,"CTV3","Smart TV 65 Crystal UHD 4K Samsung 65BU8000," +
                 " Painel Dynamic Crystal Color, Design slim, Tela sem limites, Alexa built in, Controle Remoto Único",
                 4.500,null,Instant.now(),Instant.now());
         Product product4=new Product(null,"TV4","Smart TV 65 Crystal UHD 4K Samsung 65BU8000," +
@@ -86,8 +90,11 @@ public class DscatalogApplication implements CommandLineRunner {
         product11.getCategories().add(category1);
         product12.getCategories().add(category2);
 
-        productRepository.saveAll(Arrays.asList( product1,product2,product3,product4,product5,product6,product7,product8,product9,product10));
+        productRepository.saveAll(Arrays.asList( product1,product2,product3,product4,product5,product6,product7,product8,product9,product10,product11,product12));
 
-
-    }
 }
+
+
+     */
+}
+

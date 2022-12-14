@@ -4,19 +4,18 @@ import com.anasatanaslopessantantospedra.dscatalog.DTO.CategoryDTO;
 import com.anasatanaslopessantantospedra.dscatalog.DTO.ProductDTO;
 import com.anasatanaslopessantantospedra.dscatalog.model.Category;
 import com.anasatanaslopessantantospedra.dscatalog.model.Product;
-import com.anasatanaslopessantantospedra.dscatalog.repository.categoryrepository.CategoryRepository;
-import com.anasatanaslopessantantospedra.dscatalog.repository.productrepository.ProductRepository;
+import com.anasatanaslopessantantospedra.dscatalog.repositories.categoryrepository.CategoryRepository;
+import com.anasatanaslopessantantospedra.dscatalog.repositories.productrepository.ProductRepository;
 import com.anasatanaslopessantantospedra.dscatalog.service.exceptions.DataBaseException;
 import com.anasatanaslopessantantospedra.dscatalog.service.exceptions.ResorceNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.time.Instant;
 import java.util.Optional;
 
 @Service
@@ -31,8 +30,8 @@ public class ProductService {
 
 
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAllProductPaged(PageRequest pageRequest){
-        Page<Product> list=productRepository.findAll(pageRequest);
+    public Page<ProductDTO> findAllProductPaged(Pageable pageable){
+        Page<Product> list=productRepository.findAll(pageable);
         return list.map(x -> new ProductDTO(x));
     }
     @Transactional(readOnly = true)

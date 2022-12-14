@@ -14,6 +14,7 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     //@Lob
     @Column(columnDefinition = "TEXT")
@@ -21,7 +22,7 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
     @ManyToMany
-    @JoinTable(name = "tb_product_category",joinColumns = @JoinColumn(name = "product_id"),inverseJoinColumns = @JoinColumn(name = "caterory_id"))
+    @JoinTable(name = "tb_product_category",joinColumns = @JoinColumn(name = "product_id"),inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories=new HashSet<>();
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant date;

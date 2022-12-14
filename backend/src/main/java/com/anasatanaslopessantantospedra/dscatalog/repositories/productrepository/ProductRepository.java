@@ -1,4 +1,4 @@
-package com.anasatanaslopessantantospedra.dscatalog.repository.productrepository;
+package com.anasatanaslopessantantospedra.dscatalog.repositories.productrepository;
 
 import com.anasatanaslopessantantospedra.dscatalog.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
