@@ -1,6 +1,7 @@
 package com.anasatanaslopessantantospedra.dscatalog.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -15,6 +16,7 @@ public class User implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String email;
     private String password;
     @ManyToMany(fetch = FetchType.EAGER )

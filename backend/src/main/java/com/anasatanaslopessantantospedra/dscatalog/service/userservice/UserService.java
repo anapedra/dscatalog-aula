@@ -9,24 +9,27 @@ import com.anasatanaslopessantantospedra.dscatalog.repositories.rolerepository.R
 import com.anasatanaslopessantantospedra.dscatalog.repositories.userrepository.UserRepository;
 import com.anasatanaslopessantantospedra.dscatalog.service.exceptions.DataBaseException;
 import com.anasatanaslopessantantospedra.dscatalog.service.exceptions.ResorceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
 public class UserService {
 
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
+
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
-
         this.roleRepository = roleRepository;
     }
 
@@ -43,12 +46,16 @@ public class UserService {
         return new UserDTO(entity);
     }
     @Transactional
-    public UserDTO save(UserInsertDTO dto) {
-        var user=new User();
-        copyDtoToEntity(dto,user);
-        user.setPassword(dto.getPassword());
-        user=userRepository.save(user);
-        return new UserDTO(user);
+
+    public UserDTO insert(UserInsertDTO dto) {
+
+            var user=new User();
+            copyDtoToEntity(dto,user);
+            user.setPassword(passwordEncoder.encode(dto.getPassword()));
+            user=userRepository.save(user);
+            return new UserDTO(user);
+
+            
     }
     @Transactional
     public UserDTO upDate(Long id,UserDTO userDTO){
@@ -63,7 +70,7 @@ public class UserService {
         }
 
     }
-
+    @Transactional
     public void deleteById(Long id){
 
         try {

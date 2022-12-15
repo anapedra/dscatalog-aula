@@ -1,4 +1,4 @@
-package com.anasatanaslopessantantospedra.dscatalog.controller;
+package com.anasatanaslopessantantospedra.dscatalog.controller.productcontroller;
 
 import com.anasatanaslopessantantospedra.dscatalog.DTO.ProductDTO;
 import com.anasatanaslopessantantospedra.dscatalog.service.produtctservice.ProductService;
