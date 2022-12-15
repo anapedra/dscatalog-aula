@@ -1,7 +1,10 @@
 package com.anasatanaslopessantantospedra.dscatalog.DTO;
 
+import com.anasatanaslopessantantospedra.dscatalog.service.validetion.UserInsertValid;
+
 import javax.validation.constraints.Size;
 
+@UserInsertValid
 public class UserInsertDTO extends UserDTO{
     private static final long serialVersionUID=1L;
     @Size(min = 6, max = 12,message = "A senha tede ter entre 6 e 12 caracteres")

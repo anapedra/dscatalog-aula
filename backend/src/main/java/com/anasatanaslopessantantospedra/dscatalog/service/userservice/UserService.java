@@ -45,6 +45,7 @@ public class UserService {
                 ()-> new ResorceNotFoundException("Id "+id+" not found"));
         return new UserDTO(entity);
     }
+
     @Transactional
 
     public UserDTO insert(UserInsertDTO dto) {
