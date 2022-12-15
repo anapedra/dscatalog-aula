@@ -55,7 +55,7 @@ public class UserService {
             user=userRepository.save(user);
             return new UserDTO(user);
 
-            
+
     }
     @Transactional
     public UserDTO upDate(Long id,UserDTO userDTO){

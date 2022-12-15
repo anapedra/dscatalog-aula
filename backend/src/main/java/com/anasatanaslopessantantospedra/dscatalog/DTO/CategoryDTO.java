@@ -2,13 +2,17 @@ package com.anasatanaslopessantantospedra.dscatalog.DTO;
 
 import com.anasatanaslopessantantospedra.dscatalog.model.Category;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class CategoryDTO implements Serializable {
     private static final long serialVersionUID=1L;
+
     private Long id;
+    @NotBlank(message = "Espaço não pode ser em branco")
     private String name;
+
     public CategoryDTO(){
 
     }

@@ -3,6 +3,10 @@ package com.anasatanaslopessantantospedra.dscatalog.DTO;
 import com.anasatanaslopessantantospedra.dscatalog.model.Category;
 import com.anasatanaslopessantantospedra.dscatalog.model.Product;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -12,10 +16,15 @@ import java.util.Set;
 public class ProductDTO implements Serializable {
 private static final long serialVersionUID=1L;
     private Long id;
+    @NotBlank(message = "O campo não pode ficar em branco")
+    @Size(min = 5,max = 60,message = "Este campo comporta de 5 a 60 caracteres")
     private String name;
+    @NotBlank(message = "O campo não pode ficar em branco")
     private String description;
+    @Positive(message = "O valor tem que ser positivo")
     private Double price;
     private String imgUrl;
+    @PastOrPresent(message = "A data não pode ser futura" )
     private Instant date;
     private List<CategoryDTO> categories=new ArrayList<>();
 

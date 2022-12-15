@@ -31,14 +31,14 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productDTO);
     }
     @PostMapping
-    public ResponseEntity<Object > insertProduct(@RequestBody  ProductDTO productDTO){
+    public ResponseEntity<Object > insertProduct(@RequestBody @Valid ProductDTO productDTO){
        productDTO=productService.saveProduct(productDTO);
         URI uri= ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(productDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(productDTO);
 
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProductDTO>upDateCateriry(@PathVariable Long id,@RequestBody  ProductDTO productDTO){
+    public ResponseEntity<ProductDTO>upDateCateriry(@PathVariable Long id,@RequestBody  @Valid ProductDTO productDTO){
        productDTO=productService.upDateProduct(id, productDTO);
         return ResponseEntity.noContent().build();
     }

@@ -1,6 +1,9 @@
 package com.anasatanaslopessantantospedra.dscatalog.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -14,7 +17,6 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     //@Lob
     @Column(columnDefinition = "TEXT")
